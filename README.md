@@ -2,9 +2,9 @@
 
 A module with the UI to build headers HTTP editor with the support of the AMF model.
 
-[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-forms.svg)](https://www.npmjs.com/package/@advanced-rest-client/api-forms)
+[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-headers.svg)](https://www.npmjs.com/package/@advanced-rest-client/api-headers)
 
-[![Build Status](https://travis-ci.com/advanced-rest-client/api-forms.svg)](https://travis-ci.com/advanced-rest-client/api-forms)
+[![Build Status](https://travis-ci.com/advanced-rest-client/api-headers.svg)](https://travis-ci.com/advanced-rest-client/api-headers)
 
 The `api-headers-editor` extends the `HeadersEditorElement` class from the `@advanced-rest-client/arc-headers` module. The editor mechanics is in the `HeadersEditorElement` class but the API editor adds AMF overlay for this logic.
 
