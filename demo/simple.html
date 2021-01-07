@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>api-headers-editor demo</title>
+
+  <script src="../../../@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../../../web-animations-js/web-animations-next.min.js"></script>
+
+  <script type="module">
+    import '../../../@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+    import '../../../@polymer/iron-demo-helpers/demo-snippet.js';
+    import '../../../@polymer/polymer/lib/elements/dom-bind.js';
+    import '../../../@polymer/paper-styles/paper-styles.js';
+    import '../../../@polymer/paper-toggle-button/paper-toggle-button.js';
+    import '../../../@advanced-rest-client/arc-electron-default-theme/arc-electron-default-theme.js';
+    import '../api-headers-editor.js';
+  </script>
+  <!--
+  With HTML imports this was relatively easy task to perform inside web component.
+  With module imports it's all get very messy with legacy scripts (using webpack or whatever).
+  This scripts cannot be loaded inside the the module as it wont be added to the window object.
+  CodeMirror uses `this` instead of `window` or `self` and do not exports any instance.
+  Therefore the CM scripts has to be loaded outside the componet.
+  -->
+  <script src="../../../codemirror/lib/codemirror.js"></script>
+  <script src="../../../codemirror/addon/mode/loadmode.js"></script>
+  <script src="../../../codemirror/mode/meta.js"></script>
+  <script src="../../../@advanced-rest-client/code-mirror-hint/headers-addon.js"></script>
+  <script src="../../../@advanced-rest-client/code-mirror-hint/show-hint.js"></script>
+  <script src="../../../@advanced-rest-client/code-mirror-hint/hint-http-headers.js"></script>
+
+  <custom-style>
+    <style is="custom-style" include="demo-pages-shared-styles">
+    body,
+    html {
+      background-color: #e5e5e5;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+    }
+
+    .card {
+      @apply --shadow-elevation-4dp;
+      padding: 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      box-sizing: border-box;
+      background-color: #fff;
+    }
+
+    h1 {
+      @apply --paper-font-headline;
+    }
+
+    h2 {
+      @apply --paper-font-title;
+    }
+
+    output {
+      white-space: pre-wrap;
+      @apply --paper-font-code1;
+    }
+
+    header {
+      padding: 12px 24px;
+      background-color: #C5E1A5;
+    }
+
+    paper-toggle-button {
+      margin-bottom: 12px;
+    }
+    </style>
+  </custom-style>
+</head>
+<body>
+  <dom-bind id="demo">
+    <template>
+      <header><h1>api-headers-editor demo</h1></header>
+
+      <section role="main" class="vertical-section-container centered card">
+        <api-headers-editor value="{{value}}" narrow="[[narrow]]" allow-custom="[[allowCustom]]" allow-disable-params="[[allowDisableParams]]" allow-hide-optional="[[allowHideOptional]]" readonly="[[readonly]]" no-docs="[[noDocs]]" on-request-headers-changed="_headersChanged"></api-headers-editor>
+      </section>
+
+      <section class="vertical-section-container centered card">
+        <h2>Headers change event dispatched</h2>
+        <output>Count: [[changeCount]]</output>
+        <h2>Output</h2>
+        <output>[[value]]</output>
+      </section>
+
+      <section class="vertical-section-container centered card">
+        <paper-toggle-button checked="{{narrow}}">Render narrow view</paper-toggle-button>
+        <paper-toggle-button checked="{{allowCustom}}">Allow custom properties</paper-toggle-button>
+        <paper-toggle-button checked="{{allowHideOptional}}">Allow auto hide optional headers</paper-toggle-button>
+        <paper-toggle-button checked="{{allowDisableParams}}">Allow disabling parameters</paper-toggle-button>
+        <paper-toggle-button checked="{{readonly}}">Read only mode</paper-toggle-button>
+        <paper-toggle-button checked="{{noDocs}}">Disable inline documentation</paper-toggle-button>
+      </section>
+    </template>
+  </dom-bind>
+  <script type="module">
+  (function(scope) {
+    scope.changeCount = 0;
+    scope.allowCustom = true;
+    scope._headersChanged = function() {
+      scope.changeCount++;
+    };
+  })(document.getElementById('demo'));
+  </script>
+</body>
+</html>

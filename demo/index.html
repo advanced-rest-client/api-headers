@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+  <title>api-headers-editor demo</title>
+
+  <!--
+  With HTML imports this was relatively easy task to perform inside web component.
+  With module imports it's all get very messy with legacy scripts (using webpack or whatever).
+  This scripts cannot be loaded inside the the module as it wont be added to the window object.
+  CodeMirror uses `this` instead of `window` or `self` and do not exports any instance.
+  Therefore the CM scripts has to be loaded outside the component.
+  -->
+  <script src="../node_modules/codemirror/lib/codemirror.js"></script>
+  <!-- <script src="../node_modules/@advanced-rest-client/code-mirror-hint/headers-addon.js"></script> -->
+  <!-- <script src="../node_modules/@advanced-rest-client/code-mirror-hint/show-hint.js"></script> -->
+  <!-- <script src="../node_modules/@advanced-rest-client/code-mirror-hint/hint-http-headers.js"></script> -->
+
+  <style>
+  [role="main"].centered {
+    max-width: 1440px;
+  }
+
+  output {
+    background-color: #FFF3E0;
+    white-space: pre-wrap;
+    margin-top: 40px;
+  }
+
+  api-headers-editor[invalid] {
+    border-color: red;
+  }
+
+  body.styled.dark output {
+    background-color: #263238;
+  }
+
+  body.styled {
+    --arc-font-code-family: 'Roboto Mono', 'Consolas', 'Menlo', monospace;
+    --link-color: #00A1DF;
+
+    --anypoint-dropdown-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+    --anypoint-autocomplete-dropdown-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4);
+    --primary-color: #00A2DF;
+    
+    --error-color: red;
+  }
+
+  body.styled.dark {
+    --primary-background-color: #373737;
+    --anypoint-listbox-background-color: var(--primary-background-color);
+    --anypoint-input-background-color: #373737;
+    --anypoint-item-hover-background-color: var(--anypoint-input-background-color);
+    --anypoint-item-focused-background-color: var(--anypoint-input-background-color);
+  }
+  </style>
+</head>
+<body>
+  <div id="demo"></div>
+
+  <script type="module" src="index.js"></script>
+</body>
+</html>

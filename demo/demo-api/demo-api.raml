@@ -1,0 +1,157 @@
+#%RAML 1.0
+title: Headers example
+version: v1
+baseUri: http://domain.api.domain.com/{version}/
+
+types:
+  ExampleType:
+    displayName: My example type
+    properties:
+      exampleType1: number
+      exampleType2: string
+traits:
+  Headerable:
+    headers:
+      x-trait-header: string
+      x-complex: ExampleType
+  Paginated: !include headers.raml
+
+/local-trait-headers:
+  get:
+    is: [Headerable]
+  post:
+    is: [Paginated]
+/external-trait-headers:
+  get:
+    is: [Paginated]
+/traits-combo:
+  get:
+    is: [Headerable, Paginated]
+/nullable:
+  get:
+    headers:
+      x-nullable:
+        type: string | nil
+        description: |
+          This header is required but it can be nil value.
+/standard-headers:
+  get:
+    headers:
+      Accept:
+        type: string
+        default: "*/*"
+      Accept-Encoding:
+        type: string
+        default: gzip, deflate, br
+      Accept-Language:
+        default: en-US,en;q=0.9,pl;q=0.8
+        type: string
+      Connection:
+        type: string
+        default: keep-alive
+      Cookie:
+        type: string
+        default: io=cwHYIbRfVegyuHVBAAAB
+      Host:
+        type: string
+        default: localhost:8000
+      If-None-Match:
+        type: string
+        default: "3ea-zgw72rkL0BSGBEXgj3RxdUya/Ks"
+      Origin:
+        type: string
+        default: http://localhost:8000
+      Referer:
+        type: string
+        default: http://localhost:8000/demo/
+      Sec-Fetch-Mode:
+        type: string
+        default: cors
+      Sec-Fetch-Site:
+        type: string
+        default: same-origin
+      User-Agent:
+        type: string
+        default: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3876.0 Safari/537.36
+/endpoint:
+  get:
+    is: [Headerable]
+    headers:
+      ETag:
+        type: string
+        description: |
+          An etag of the resource
+        required: false
+      Cache-Control: string
+      x-string: string
+      x-optional:
+        type: string
+        required: false
+        example: "x-optional: someHeader"
+        default: defaultValue
+        displayName: XOptimal
+        pattern: ^[a-zA-Z\W:]+$
+        minLength: 4
+        maxLength: 30
+      x-required:
+        type: string
+        required: true
+        example: required header
+        default: default required value
+      x-boolean:
+        type: boolean
+      x-date-only:
+        type: date-only
+      x-time-only:
+        type: time-only
+      x-datetime-only: datetime-only
+      x-datetime: datetime
+      x-integer: integer
+      x-array:
+        type: string[]
+      x-object:
+        type: object
+        properties:
+          prop-string: string
+          prop-int: integer
+      x-type: ExampleType
+      x-enum:
+        type: string
+        enum: [one, two, three]
+      x-number:
+        type: number
+        description: |
+          MY number header
+        minimum: 10
+        maximum: 100
+        required: false
+        displayName: XNumber
+        default: 30
+        examples:
+           minimum: 10
+           optimal: 30
+           wide: 60
+           full: 100
+        multipleOf: 10
+      x-union:
+        type: string | integer
+        displayName: Union type
+        examples:
+          stringExample: Hello union
+          numberExample: 25
+  post:
+    headers:
+      Accept:
+        example: application/json
+        required: false
+      x-required:
+        required: true
+      x-required-with-value:
+        required: true
+        default: Default value
+      x-required-with-example:
+        required: true
+        example: Header example
+      x-not-required-with-example:
+        required: false
+        example: Header example

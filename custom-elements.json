@@ -1,0 +1,211 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "api-headers-editor",
+      "path": "./api-headers-editor.js",
+      "description": "An element to render a HTTP headers editor based on the AMF data model.",
+      "attributes": [
+        {
+          "name": "noSourceEditor",
+          "description": "When set only form editor is available.\n\nNote, because of dependency, you still have to import CodeMirror\nor at lease provide a mock function for registering addons.\n\nSee @advanced-rest-client/code-mirror-hint for used functions.",
+          "type": "boolean"
+        },
+        {
+          "name": "optionalOpened",
+          "description": "Set to true to show optional parameters (not required by the API).",
+          "type": "boolean"
+        },
+        {
+          "name": "hasOptional",
+          "description": "Computed value from `allowHideOptional` and view model.\n`true` if current model has any optional property.",
+          "type": "boolean"
+        },
+        {
+          "name": "allowHideOptional",
+          "description": "If set it computes `hasOptional` property and shows checkbox in the\nform to show / hide optional properties.",
+          "type": "boolean"
+        },
+        {
+          "name": "renderOptionalCheckbox",
+          "description": "Computed flag to determine if optional checkbox can be rendered",
+          "type": "boolean"
+        },
+        {
+          "name": "allowDisableParams",
+          "description": "If set, enable / disable param checkbox is rendered next to each\nform item.",
+          "type": "boolean"
+        },
+        {
+          "name": "allowCustom",
+          "description": "When set, renders \"add custom\" item button.\nIf the element is to be used without AMF model this should always\nbe enabled. Otherwise users won't be able to add a parameter.",
+          "type": "boolean"
+        },
+        {
+          "name": "narrow",
+          "description": "Renders items in \"narrow\" view",
+          "type": "boolean"
+        },
+        {
+          "name": "renderEmptyMessage",
+          "description": "Computed value. The form renders empty message (if supported by\nthe form element). It occurs when model is not set and allowCustom\nis not set",
+          "type": "boolean"
+        },
+        {
+          "name": "value",
+          "description": "Headers value.",
+          "type": "string"
+        },
+        {
+          "name": "source",
+          "description": "When enabled it renders source mode (code mirror editor with headers support)",
+          "type": "boolean"
+        },
+        {
+          "name": "readOnly",
+          "description": "When set the editor is in read only mode.",
+          "type": "boolean"
+        },
+        {
+          "name": "compatibility",
+          "description": "Enables compatibility with Anypoint components.",
+          "type": "boolean"
+        },
+        {
+          "name": "outlined",
+          "description": "Enables Material Design outlined style",
+          "type": "boolean"
+        }
+      ],
+      "properties": [
+        {
+          "name": "amfHeaders",
+          "description": "List of headers defined in AMF model to render."
+        },
+        {
+          "name": "noSourceEditor",
+          "attribute": "noSourceEditor",
+          "description": "When set only form editor is available.\n\nNote, because of dependency, you still have to import CodeMirror\nor at lease provide a mock function for registering addons.\n\nSee @advanced-rest-client/code-mirror-hint for used functions.",
+          "type": "boolean"
+        },
+        {
+          "name": "viewFactory",
+          "type": "ApiViewModel"
+        },
+        {
+          "name": "apiModel",
+          "description": "View model to use to render the form.",
+          "type": "AmfFormItem[]"
+        },
+        {
+          "name": "optionalOpened",
+          "attribute": "optionalOpened",
+          "description": "Set to true to show optional parameters (not required by the API).",
+          "type": "boolean"
+        },
+        {
+          "name": "hasOptional",
+          "attribute": "hasOptional",
+          "description": "Computed value from `allowHideOptional` and view model.\n`true` if current model has any optional property.",
+          "type": "boolean"
+        },
+        {
+          "name": "allowHideOptional",
+          "attribute": "allowHideOptional",
+          "description": "If set it computes `hasOptional` property and shows checkbox in the\nform to show / hide optional properties.",
+          "type": "boolean"
+        },
+        {
+          "name": "renderOptionalCheckbox",
+          "attribute": "renderOptionalCheckbox",
+          "description": "Computed flag to determine if optional checkbox can be rendered",
+          "type": "boolean"
+        },
+        {
+          "name": "allowDisableParams",
+          "attribute": "allowDisableParams",
+          "description": "If set, enable / disable param checkbox is rendered next to each\nform item.",
+          "type": "boolean"
+        },
+        {
+          "name": "allowCustom",
+          "attribute": "allowCustom",
+          "description": "When set, renders \"add custom\" item button.\nIf the element is to be used without AMF model this should always\nbe enabled. Otherwise users won't be able to add a parameter.",
+          "type": "boolean"
+        },
+        {
+          "name": "narrow",
+          "attribute": "narrow",
+          "description": "Renders items in \"narrow\" view",
+          "type": "boolean"
+        },
+        {
+          "name": "renderEmptyMessage",
+          "attribute": "renderEmptyMessage",
+          "description": "Computed value. The form renders empty message (if supported by\nthe form element). It occurs when model is not set and allowCustom\nis not set",
+          "type": "boolean"
+        },
+        {
+          "name": "ns",
+          "description": "A namespace for AMF model.",
+          "type": "Namespace"
+        },
+        {
+          "name": "amf",
+          "description": "Generated AMF json/ld model form the API spec.\nThe element assumes the object of the first array item to be a\ntype of `\"http://raml.org/vocabularies/document#Document`\non AMF vocabulary.\n\nIt is only usefult for the element to resolve references.",
+          "type": "object | object[] | undefined"
+        },
+        {
+          "name": "styles",
+          "type": "CSSResult[]"
+        },
+        {
+          "name": "value",
+          "attribute": "value",
+          "description": "Headers value.",
+          "type": "string"
+        },
+        {
+          "name": "model",
+          "description": "The view model to use to render the values.\nNote, the `model` property is immediately updated when the `value` is set.\nWhen the hosting application uses both values make sure to only set the `model` property.\n\nAlso note, there's no dedicated event for the model change. When value change then\nthe model changed as well.",
+          "type": "AmfFormItem[]"
+        },
+        {
+          "name": "source",
+          "attribute": "source",
+          "description": "When enabled it renders source mode (code mirror editor with headers support)",
+          "type": "boolean"
+        },
+        {
+          "name": "readOnly",
+          "attribute": "readOnly",
+          "description": "When set the editor is in read only mode.",
+          "type": "boolean"
+        },
+        {
+          "name": "compatibility",
+          "attribute": "compatibility",
+          "description": "Enables compatibility with Anypoint components.",
+          "type": "boolean"
+        },
+        {
+          "name": "outlined",
+          "attribute": "outlined",
+          "description": "Enables Material Design outlined style",
+          "type": "boolean"
+        },
+        {
+          "name": "eventsTarget",
+          "description": "By default the element listens on the `window` object. If this value is set,\nthen all events listeners will be attached to this object instead of `window`.",
+          "type": "EventTarget"
+        }
+      ],
+      "events": [
+        {
+          "name": "change",
+          "description": "Dispatches when a value change after the user manipulate the editor value."
+        }
+      ]
+    }
+  ]
+}
