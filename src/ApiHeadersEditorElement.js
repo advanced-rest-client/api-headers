@@ -123,6 +123,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
   [createViewModel](input) {
     const result = /** @type AmfFormItem[] */ (super[createViewModel](input));
     const { apiModel=[] } = this;
+    this._consolidateWithAmfHeaders(result);
     result.forEach((item) => {
       if (!item.schema) {
         // eslint-disable-next-line no-param-reassign
@@ -284,5 +285,24 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
 
   [formHeaderTemplate]() {
     return html``;
+  }
+
+  /**
+   * For a list of header form items, if the header is defined by the model,
+   * copy the original header's schema into the current header's schema
+   * @param {AmfFormItem[]} formItems
+   */
+  _consolidateWithAmfHeaders(formItems) {
+    const amfHeaders = this.computeDataModel(this[amfHeadersValue]);
+    if (!amfHeaders || !formItems) {
+      return;
+    }
+    formItems.forEach(item => {
+      const amfHeader = amfHeaders.find(header => header.name === item.name);
+      if (amfHeader) {
+        // eslint-disable-next-line no-param-reassign
+        item.schema = { ...(item.schema || {}), ...amfHeader.schema };
+      }
+    });
   }
 }
