@@ -30,6 +30,7 @@ export const amfHeadersValue = Symbol('amfHeadersValue');
 export const optionalToggleTemplate = Symbol('optionalToggleTemplate');
 export const optionalHandler = Symbol('optionalHandler');
 export const apiFormHandler = Symbol('apiFormHandler');
+const consolidateWithAmfHeaders = Symbol('consolidateWithAmfHeaders');
 
 /**
  * An element to render a HTTP headers editor based on the AMF data model.
@@ -123,7 +124,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
   [createViewModel](input) {
     const result = /** @type AmfFormItem[] */ (super[createViewModel](input));
     const { apiModel=[] } = this;
-    this._consolidateWithAmfHeaders(result);
+    this[consolidateWithAmfHeaders](result);
     result.forEach((item) => {
       if (!item.schema) {
         // eslint-disable-next-line no-param-reassign
@@ -292,7 +293,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
    * copy the original header's schema into the current header's schema
    * @param {AmfFormItem[]} formItems
    */
-  _consolidateWithAmfHeaders(formItems) {
+  [consolidateWithAmfHeaders](formItems) {
     const amfHeaders = this.computeDataModel(this[amfHeadersValue]);
     if (!amfHeaders || !formItems) {
       return;
