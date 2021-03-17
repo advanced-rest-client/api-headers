@@ -1,8 +1,8 @@
-import { fixture, assert, nextFrame, aTimeout, html } from '@open-wc/testing';
-import * as sinon from 'sinon';
+import { fixture, assert, nextFrame, html } from '@open-wc/testing';
 import { ApiViewModel } from '@api-components/api-forms';
 import { AmfLoader } from './amf-loader.js';
 import '../api-headers-editor.js';
+import { amfHeadersValue } from '../src/ApiHeadersEditorElement.js';
 
 /** @typedef {import('../').ApiHeadersEditorElement} ApiHeadersEditorElement */
 
@@ -167,6 +167,21 @@ describe('ApiHeadersEditorElement', () => {
           assert.notInclude(value, 'x-optional', 'x-optional is not present (optional)');
           assert.include(value, 'x-required: default required value', 'x-required is present (default value)');
           assert.include(value, 'x-union: Hello union', 'x-union is present (value from example)');
+        });
+
+        it('should maintain header schema after editing source', async () => {
+          element.shadowRoot.querySelector('anypoint-switch').click();
+          await nextFrame();
+          const codeMirrorElem = element.shadowRoot.querySelector('code-mirror');
+          // @ts-ignore
+          codeMirrorElem.value += ' '
+          await nextFrame();
+          element.shadowRoot.querySelector('anypoint-switch').click();
+          await nextFrame();
+          const formItem = element.shadowRoot.querySelector('api-form-item');
+          const amfHeaders = element.computeDataModel(element[amfHeadersValue]);
+          const header = amfHeaders.find(h => h.name === formItem.model.name);
+          assert.deepEqual(formItem.model.schema, header.schema);
         });
       });
     });
