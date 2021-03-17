@@ -299,7 +299,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
       return;
     }
     formItems.forEach(item => {
-      const amfHeader = amfHeaders.find(header => header.name === item.name);
+      const amfHeader = amfHeaders.find(header => header.name.toLowerCase() === item.name.toLowerCase());
       if (amfHeader) {
         // eslint-disable-next-line no-param-reassign
         item.schema = { ...(item.schema || {}), ...amfHeader.schema };
