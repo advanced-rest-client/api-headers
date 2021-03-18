@@ -113,7 +113,8 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
       return;
     }
     this.addCustom();
-    this.model = this.apiModel;
+    const { model = [], apiModel = [] } = this
+    this.model = [...model, apiModel[apiModel.length - 1]];
   }
 
   /**

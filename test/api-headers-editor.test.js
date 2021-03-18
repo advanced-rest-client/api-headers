@@ -183,6 +183,29 @@ describe('ApiHeadersEditorElement', () => {
           const header = amfHeaders.find(h => h.name === formItem.model.name);
           assert.deepEqual(formItem.model.schema, header.schema);
         });
+
+        it('should not delete last header added by source when adding custom header', async () => {
+          element.allowCustom = true;
+          // Go to source view
+          element.shadowRoot.querySelector('anypoint-switch').click();
+          await nextFrame();
+          const codeMirrorElem = element.shadowRoot.querySelector('code-mirror');
+          // @ts-ignore
+          codeMirrorElem.value += '\nNew header: new header value'
+          await nextFrame();
+          // Go back to form view
+          element.shadowRoot.querySelector('anypoint-switch').click();
+          await nextFrame();
+          element.add();
+          await nextFrame();
+          const { model } = element;
+          const lastItem = model[model.length - 1];
+          assert.isEmpty(lastItem.name);
+          assert.isEmpty(lastItem.value);
+          const secondToLastItem = model[model.length - 2];
+          assert.equal(secondToLastItem.name, 'New header');
+          assert.equal(secondToLastItem.value, 'new header value');
+        });
       });
     });
   });

@@ -9,4 +9,8 @@ api-form-item {
 .form-row {
   min-height: 48px;
 }
+
+:host([compatibility]) api-form-item {
+  margin-bottom: 30px;
+}
 `;
