@@ -56,6 +56,7 @@ $RECYCLE.BIN/
 
 node_modules
 coverage
+.idea
 
 # AMF models
 /demo/*.json

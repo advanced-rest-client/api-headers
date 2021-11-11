@@ -1,17 +1,17 @@
 /* eslint-disable class-methods-use-this */
 /**
-@license
-Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
-Licensed under the Apache License, Version 2.0 (the "License"); you may not
-use this file except in compliance with the License. You may obtain a copy of
-the License at
-http://www.apache.org/licenses/LICENSE-2.0
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
-WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
-License for the specific language governing permissions and limitations under
-the License.
-*/
+ @license
+ Copyright 2018 The Advanced REST client authors <arc@mulesoft.com>
+ Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ use this file except in compliance with the License. You may obtain a copy of
+ the License at
+ http://www.apache.org/licenses/LICENSE-2.0
+ Unless required by applicable law or agreed to in writing, software
+ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ License for the specific language governing permissions and limitations under
+ the License.
+ */
 import { HeadersEditorElement } from '@advanced-rest-client/arc-headers';
 import { notifyValueChange, headerToggleTemplate, addTemplate, emptyTemplate, editorSwitchTemplate, copyActionButtonTemplate, formHeaderTemplate, propagateModelChange, createViewModel, headerItemTemplate, headerNameInput, headerValueInput, headerRemoveTemplate, contentActionsTemplate } from '@advanced-rest-client/arc-headers/src/internals.js';
 import { ApiFormMixin, ApiViewModel, apiFormStyles } from '@api-components/api-forms';
@@ -78,7 +78,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
     this.requestUpdate();
     this[notifyValueChange]();
   }
-  
+
   constructor() {
     super();
     this.viewFactory = new ApiViewModel();
@@ -91,7 +91,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
 
   /**
    * Computes view model used by the element from the AMF headers
-   * @param {any} value 
+   * @param {any} value
    * @returns {AmfFormItem[]}
    */
   computeDataModel(value) {
@@ -99,7 +99,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
   }
 
   /**
-   * @param {any} amf 
+   * @param {any} amf
    */
   __amfChanged(amf) {
     this.viewFactory.amf = amf;
@@ -149,6 +149,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
     const index = Number(node.dataset.index);
     const item = this.apiModel[index];
     item.value = node.value;
+    this.model = this.apiModel;
     this[propagateModelChange]();
     this[notifyValueChange]();
   }
