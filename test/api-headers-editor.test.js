@@ -1,5 +1,6 @@
 import { fixture, assert, nextFrame, html } from '@open-wc/testing';
 import { ApiViewModel } from '@api-components/api-forms';
+import { sendKeys } from '@web/test-runner-commands'
 import { AmfLoader } from './amf-loader.js';
 import '../api-headers-editor.js';
 import { amfHeadersValue } from '../src/ApiHeadersEditorElement.js';
@@ -205,6 +206,32 @@ describe('ApiHeadersEditorElement', () => {
           const secondToLastItem = model[model.length - 2];
           assert.equal(secondToLastItem.name, 'New header');
           assert.equal(secondToLastItem.value, 'new header value');
+        });
+
+        it('should not reset headers when manually changing value, and then changing the form', async () =>{
+          const expected = `Cache-Control: another test value
+x-string: test value
+x-required: default required value
+x-boolean: false
+x-date-only: 
+x-time-only: 
+x-datetime-only: 
+x-datetime: 
+x-integer: 0`
+          element.value = `Cache-Control: 
+x-string: test value
+x-required: default required value
+x-boolean: false
+x-date-only: 
+x-time-only: 
+x-datetime-only: 
+x-datetime: 
+x-integer: 0`
+
+          element.shadowRoot.querySelector('api-form-item').shadowRoot.querySelector('anypoint-input').shadowRoot.querySelector('input').focus();
+          await sendKeys({ type: 'another test value' });
+          await nextFrame();
+          assert.equal(element.value, expected);
         });
       });
     });

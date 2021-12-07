@@ -1,0 +1,63 @@
+#%RAML 1.0
+title: Credential Population API
+
+baseUri: https://example.org
+
+annotationTypes:
+  credentialType: string
+
+traits:
+  WithCredentials:
+    headers:
+      client_id:
+        type: string
+        (credentialType): id
+      client_secret:
+        type: string
+        (credentialType): secret
+
+/test:
+  /inline:
+    get:
+      headers:
+        client_id:
+          type: string
+          (credentialType): id
+        client_secret:
+          type: string
+          (credentialType): secret
+        testHeader:
+          type: string
+  /with-trait:
+    is:
+      - WithCredentials
+    get:
+
+/all-query:
+  get:
+    queryParameters:
+      query_id:
+        type: string
+        (credentialType): id
+      query_secret:
+        type: string
+        (credentialType): secret
+/all-headers:
+  get:
+      headers:
+        header_id:
+          type: string
+          (credentialType): id
+        header_secret:
+          type: string
+          (credentialType): secret
+/mixed:
+  get:
+      queryParameters:
+        queryId:
+          type: string
+          (credentialType): id
+      headers:
+        headerSecret:
+          type: string
+          (credentialType): secret
