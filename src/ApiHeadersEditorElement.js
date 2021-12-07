@@ -147,9 +147,9 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
   [apiFormHandler](e) {
     const node = /** @type HTMLInputElement */ (e.target);
     const index = Number(node.dataset.index);
-    const item = this.apiModel[index];
+    const item = this.model[index];
     item.value = node.value;
-    this.model = this.apiModel;
+    this.apiModel = this.model;
     this[propagateModelChange]();
     this[notifyValueChange]();
   }
