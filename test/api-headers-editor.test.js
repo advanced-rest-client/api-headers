@@ -233,6 +233,14 @@ x-integer: 0`
           await nextFrame();
           assert.equal(element.value, expected);
         });
+
+        it('should reset model on amfHeaders change to undefined', async () => {
+          const originalModel = element.model;
+          element.amfHeaders = undefined;
+          await nextFrame();
+          assert.isEmpty(element.model);
+          assert.notDeepEqual(element.model, originalModel);
+        });
       });
     });
   });
