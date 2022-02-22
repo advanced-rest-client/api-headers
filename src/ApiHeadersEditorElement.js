@@ -73,7 +73,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
       return;
     }
     this[amfHeadersValue] = value;
-    this.model = this.computeDataModel(value);
+    this.model = value ? this.computeDataModel(value) : [];
     this.apiModel = this.model;
     this.requestUpdate();
     this[notifyValueChange]();
