@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-headers",
   "description": "A library containing elements to support HTTP headers editing supported by the AMF model.",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
