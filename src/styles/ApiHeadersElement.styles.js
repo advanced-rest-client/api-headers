@@ -12,5 +12,6 @@ api-form-item {
 
 :host([compatibility]) api-form-item {
   margin-bottom: 30px;
+  margin-top: 25px;
 }
 `;
