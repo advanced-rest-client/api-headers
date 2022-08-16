@@ -199,6 +199,9 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
    * @return {TemplateResult}
    */
   [headerItemTemplate](item, index) {
+    if (this.renderOptionalCheckbox && !this.optionalOpened && item.schema && !item.schema.required) {
+      return html``;
+    }
     return html`
     <div class="form-row form-item" ?data-optional="${isOptional(this.hasOptional, item)}">
       ${this[headerToggleTemplate](item, index)}

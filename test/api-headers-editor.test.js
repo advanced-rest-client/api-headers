@@ -241,6 +241,15 @@ x-integer: 0`
           assert.isEmpty(element.model);
           assert.notDeepEqual(element.model, originalModel);
         });
+
+        it('should not render optional headers if renderOptionalCheckbox set and toggle off', async () => {
+          assert.lengthOf(element.shadowRoot.querySelectorAll('.form-item'), 19);
+
+          element.renderOptionalCheckbox = true;
+          await nextFrame();
+
+          assert.lengthOf(element.shadowRoot.querySelectorAll('.form-item'), 16);
+        });
       });
     });
   });
