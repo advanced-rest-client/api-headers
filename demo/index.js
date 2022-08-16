@@ -12,13 +12,13 @@ class ApiDemo extends ApiDemoPage {
 
     this.initObservableProperties([
       'allowDisableParams', 'amfHeaders',
-      'allowCustom', 'allowHideOptional', 'readOnly', 'outlined', 'compatibility',
+      'allowCustom', 'renderOptionalCheckbox', 'readOnly', 'outlined', 'compatibility',
       'headers', 'noSourceEditor'
     ]);
 
     this.allowDisableParams = false;
     this.allowCustom = false;
-    this.allowHideOptional = false;
+    this.renderOptionalCheckbox = false;
     this.readOnly = false;
     this.noSourceEditor = false;
 
@@ -77,7 +77,7 @@ class ApiDemo extends ApiDemoPage {
       headers,
       allowDisableParams,
       allowCustom,
-      allowHideOptional,
+      renderOptionalCheckbox,
       readOnly,
       demoStates,
       darkThemeActive,
@@ -104,7 +104,7 @@ class ApiDemo extends ApiDemoPage {
           @change="${this._headersHandler}"
           ?allowDisableParams="${allowDisableParams}"
           ?allowCustom="${allowCustom}"
-          ?allowHideOptional="${allowHideOptional}"
+          ?renderOptionalCheckbox="${renderOptionalCheckbox}"
           ?readonly="${readOnly}"
           ?outlined="${outlined}"
           ?compatibility="${compatibility}"
@@ -122,9 +122,9 @@ class ApiDemo extends ApiDemoPage {
         <anypoint-checkbox
           aria-describedby="mainOptionsLabel"
           slot="options"
-          name="allowHideOptional"
+          name="renderOptionalCheckbox"
           @change="${this._toggleMainOption}"
-          >Allow hide</anypoint-checkbox
+          >Allow optional</anypoint-checkbox
         >
         <anypoint-checkbox
           aria-describedby="mainOptionsLabel"
