@@ -116,9 +116,9 @@ describe('ApiHeadersEditorElement', () => {
   });
 
   describe('AMF model tests', () => {
-    function getHeadersModel(element, amfModel) {
+    function getHeadersModel(element, amfModel, endpointPath = '/endpoint') {
       const webApi = element._computeWebApi(amfModel);
-      const endpoint = element._computeEndpointByPath(webApi, '/endpoint');
+      const endpoint = element._computeEndpointByPath(webApi, endpointPath);
       const opKey = element._getAmfKey(
         element.ns.aml.vocabularies.apiContract.supportedOperation
       );
@@ -148,6 +148,30 @@ describe('ApiHeadersEditorElement', () => {
           element.amf = amfModel;
           element.amfHeaders = getHeadersModel(element, amfModel);
           await nextFrame();
+        });
+
+        describe('non-required string header in AMF', () => {
+          let w11534306Model;
+
+          before(async () => {
+            w11534306Model = await AmfLoader.load(item[1], 'W-11534306');
+          });
+
+          beforeEach(async () => {
+            const factory = new ApiViewModel();
+            factory.clearCache();
+            element = await basicFixture();
+            element.amf = w11534306Model;
+            element.amfHeaders = getHeadersModel(element, w11534306Model, '/cas/defaultContribution/external/v1/adhocReport/ees/search');
+            await nextFrame();
+          });
+          
+          it('should have all headers with non-null and defined values', () => {
+            const values = element.apiModel.map(header => header.value);
+            for (let i = 0; i < values.length; i++) {
+              assert.isDefined(values[i]);
+            }
+          });
         });
 
         it('Generates view model from AMF shape', () => {

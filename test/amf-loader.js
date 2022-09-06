@@ -1,6 +1,6 @@
 export const AmfLoader = {};
-AmfLoader.load = async (compact) => {
-  const file = `/demo-api${compact ? '-compact' : ''}.json`;
+AmfLoader.load = async (compact, fileName = 'demo-api') => {
+  const file = `/${fileName}${compact ? '-compact' : ''}.json`;
   const url = `${window.location.protocol}//${window.location.host}/demo/${file}`;
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
