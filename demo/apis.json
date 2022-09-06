@@ -2,5 +2,6 @@
   "demo-api/demo-api.raml": "RAML 1.0",
   "APIC-284/APIC-284.raml": "RAML 1.0",
   "APIC-417/APIC-417.raml": "RAML 1.0",
-  "AAP-2825/AAP-2825.raml": "RAML 1.0"
+  "AAP-2825/AAP-2825.raml": "RAML 1.0",
+  "W-11534306/W-11534306.yaml": "OAS 3.0"
 }
