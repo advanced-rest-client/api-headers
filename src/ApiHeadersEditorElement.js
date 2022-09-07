@@ -73,8 +73,7 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
       return;
     }
     this[amfHeadersValue] = value;
-    const dataModel = value ? this.computeDataModel(value) : [];
-    this.model = this._ensureHeadersHaveValues(dataModel);
+    this.model = value ? this.computeDataModel(value) : [];
     this.apiModel = this.model;
     this.requestUpdate();
     this[notifyValueChange]();
@@ -310,19 +309,6 @@ export class ApiHeadersEditorElement extends ApiFormMixin(AmfHelperMixin(Headers
         // eslint-disable-next-line no-param-reassign
         item.schema = { ...(item.schema || {}), ...amfHeader.schema };
       }
-    });
-  }
-
-  _ensureHeadersHaveValues(headers) {
-    if (!headers) {
-      return undefined;
-    }
-    if (!Array.isArray(headers)) {
-      return headers;
-    }
-    return headers.map(header => {
-      const isValueNullOrUndefined = header.value === null || header.value === undefined;
-      return { ...header, value: isValueNullOrUndefined ? '' : header.value };
     });
   }
 }
